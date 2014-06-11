@@ -52,6 +52,7 @@ describe "domain parser" do
       @domain_parser.parse("http://pauldix.co.uk")[:public_suffix].should == "co.uk"
       @domain_parser.parse("http://pauldix.com.kg")[:public_suffix].should == "com.kg"
       @domain_parser.parse("http://pauldix.com.kawasaki.jp")[:public_suffix].should == "com.kawasaki.jp"
+      @domain_parser.parse("http://pauldix.uk")[:public_suffix].should == "uk"
     end
 
     it "should have the domain" do
@@ -61,11 +62,13 @@ describe "domain parser" do
       @domain_parser.parse("http://foo.pauldix.co.uk")[:domain].should == "pauldix"
       @domain_parser.parse("http://pauldix.com.kg")[:domain].should == "pauldix"
       @domain_parser.parse("http://pauldix.com.kawasaki.jp")[:domain].should == "pauldix"
+      @domain_parser.parse("http://pauldix.uk")[:domain].should == "pauldix"
     end
 
     it "should have subdomains" do
       @domain_parser.parse("http://foo.pauldix.net")[:subdomain].should == "foo"
       @domain_parser.parse("http://bar.foo.pauldix.co.uk")[:subdomain].should == "bar.foo"
+      @domain_parser.parse("http://bar.foo.pauldix.uk")[:subdomain].should == "bar.foo"      
     end
   end
 end
